@@ -9,6 +9,8 @@ import pypdfium2.raw as pdfium_c
 
 
 # TODO consider adding PdfRectangle support model to calculate size and corner points
+# NOTE the code below was written by an utter non-mathematician - might contain mistakes!
+
 
 class PdfMatrix:
     """
@@ -33,9 +35,7 @@ class PdfMatrix:
         f (float): Matrix value [2][1] (Y translation).
     """
     
-    # See also pdfium/core/fxcrt/fx_coordinates.{h,cpp}
-    # (unfortunately, pdfium's matrix implementation is non-public)
-    
+    # See also pdfium/core/fxcrt/fx_coordinates.{h,cpp} (unfortunately, pdfium's matrix implementation is non-public)
     
     def __init__(self, a=1, b=0, c=0, d=1, e=0, f=0):
         self.a, self.b, self.c, self.d, self.e, self.f = a, b, c, d, e, f
