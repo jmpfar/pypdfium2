@@ -68,7 +68,7 @@ class PdfMatrix:
         """
         Load a :class:`.PdfMatrix` from a raw :class:`FS_MATRIX` object.
         """
-        return PdfMatrix(raw.a, raw.b, raw.c, raw.d, raw.e, raw.f)
+        return cls(raw.a, raw.b, raw.c, raw.d, raw.e, raw.f)
     
     
     def to_raw(self):
