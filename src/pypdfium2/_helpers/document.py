@@ -600,7 +600,7 @@ class PdfFormEnv (AutoCloseable):
         raw (FPDF_FORMHANDLE):
             The underlying PDFium form env handle.
         config (FPDF_FORMFILLINFO):
-            Accompanying form configuration interface. Needs to remain alive while the form env is used.
+            Accompanying form configuration interface, to be kept alive.
         pdf (PdfDocument):
             Parent document this form env belongs to.
     """
