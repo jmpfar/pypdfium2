@@ -47,7 +47,7 @@ pypdfium2 includes helper classes to simplify common use cases, while the raw PD
   
   [^pdfium_buildsystem]: Replacing PDFium's toolchain with a lean build system that is designed to run on an arbitrary host platform is a long-standing task. This would be required to enable local source build capabilities on installation of an `sdist`. If you have the time and expertise to set up such a build system, please start a repository and inform us about it.
   
-  [^no_build_isolation]: Possible scenarios include using a locally modified version of a dependency, or supplying a dependency built from a certain commit (while not changing the code)
+  [^no_build_isolation]: Possible scenarios include using a locally modified version of a dependency, or supplying a dependency built from a certain commit.
   
 * Installing an unofficial distribution
   
@@ -222,7 +222,7 @@ For PDFium documentation, please look at the comments in its [public header file
 A large variety of examples on how to interface with the raw API using [`ctypes`](https://docs.python.org/3/library/ctypes.html) is already provided with [support model source code](src/pypdfium2/_helpers).
 Nonetheless, the following guide may be helpful to get started with the raw API, especially for developers who are not familiar with `ctypes` yet.
 
-[^pdfium_docs]: Unfortunately, no recent HTML-rendered documentation is available for PDFium at the moment. While large parts of the old [Foxit docs](https://developers.foxit.com/resources/pdf-sdk/c_api_reference_pdfium/group___f_p_d_f_i_u_m.html) still seem similar to PDFium's current API, many modifications and new functions are actually missing, which can be confusing.
+[^pdfium_docs]: Unfortunately, no recent HTML-rendered documentation is available for PDFium at the moment.
 
 <!-- TODO write something about weakref.finalize(); add example on creating a C page array -->
 
@@ -243,7 +243,7 @@ Nonetheless, the following guide may be helpful to get started with the raw API,
       FPDF_LoadDocument.restype = FPDF_DOCUMENT
   ```
   Python `bytes` are converted to `FPDF_STRING` by ctypes autoconversion.
-  When passing a string to a C function, it must always be null-terminated, as the function merely receives a pointer to the first element and then continues to read memory until it finds a null terminator.
+  When passing a string to a C function, it must always be null-terminated, as the function merely receives a pointer to the first item and then continues to read memory until it finds a null terminator.
   
 [^bindings_decl]: From the auto-generated bindings file, which is not part of the repository. It is built into wheels, or created on installation. If you have an editable install, the bindings file may be found at `src/raw.py`.
 
