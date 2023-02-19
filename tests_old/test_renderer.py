@@ -213,14 +213,7 @@ def test_render_page_tonumpy(rev_byteorder, sample_page):
             assert tuple(array[y][x]) == tuple(reversed(value))
 
 
-@pytest.mark.parametrize(
-    "mode",
-    [
-        None,
-        pdfium.RenderOptimizeMode.LCD_DISPLAY,
-        pdfium.RenderOptimizeMode.PRINTING,
-    ]
-)
+@pytest.mark.parametrize("mode", [None, "lcd", "print"])
 def test_render_page_optimization(sample_page, mode):
     pil_image = sample_page.render(
         optimize_mode = mode,

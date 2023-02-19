@@ -7,10 +7,7 @@ import math
 import ctypes
 import logging
 import pypdfium2.raw as pdfium_c
-from pypdfium2._helpers.misc import (
-    RenderOptimizeMode,
-    PdfiumError,
-)
+from pypdfium2._helpers.misc import PdfiumError
 from pypdfium2._helpers.bitmap import PdfBitmap
 from pypdfium2._helpers.textpage import PdfTextPage
 from pypdfium2._helpers.pageobjects import PdfObject
@@ -369,14 +366,14 @@ class PdfPage (AutoCloseable):
             grayscale (bool):
                 If True, render in grayscale mode.
                 
-            optimize_mode (RenderOptimizeMode | None):
-                Page rendering optimization mode.
+            optimize_mode (None | str):
+                Page rendering optimization mode (None, "lcd", "print").
                 
             draw_annots (bool):
                 If True, render page annotations.
                 
             no_smoothtext (bool):
-                If True, disable text anti-aliasing. Overrides :attr:`.RenderOptimizeMode.LCD_DISPLAY`.
+                If True, disable text anti-aliasing. Overrides ``optimize_mode="lcd"``.
                 
             no_smoothimage (bool):
                 If True, disable image anti-aliasing.
@@ -506,12 +503,14 @@ def _parse_renderopts(
     if rev_byteorder:
         flags |= pdfium_c.FPDF_REVERSE_BYTE_ORDER
     
-    if optimize_mode is RenderOptimizeMode.LCD_DISPLAY:
-        flags |= pdfium_c.FPDF_LCD_TEXT
-    elif optimize_mode is RenderOptimizeMode.PRINTING:
-        flags |= pdfium_c.FPDF_PRINTING
-    elif optimize_mode:
-        raise ValueError("Invalid optimize_mode %s" % optimize_mode)
+    if optimize_mode:
+        optimize_mode = optimize_mode.lower()
+        if optimize_mode == "lcd":
+            flags |= pdfium_c.FPDF_LCD_TEXT
+        elif optimize_mode == "print":
+            flags |= pdfium_c.FPDF_PRINTING
+        else:
+            raise ValueError("Invalid optimize_mode %s" % optimize_mode)
     
     # TODO consider using a namedtuple or something
     return cl_format, rev_byteorder, fill_color, flags

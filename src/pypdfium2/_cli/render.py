@@ -63,8 +63,8 @@ def attach(parser):
     )
     parser.add_argument(
         "--optimize-mode",
-        type = lambda s: pdfium.RenderOptimizeMode[s.upper()],
-        help = "Select a rendering optimisation mode (none, lcd_display, printing)",
+        choices = ("lcd", "print"),
+        help = "Select a rendering optimisation mode (lcd, print)",
     )
     parser.add_argument(
         "--grayscale",
