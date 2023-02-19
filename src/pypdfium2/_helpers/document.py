@@ -29,7 +29,7 @@ class PdfDocument (AutoCloseable):
     Parameters:
         input_data (str | pathlib.Path | bytes | ctypes.Array | typing.BinaryIO | FPDF_DOCUMENT):
             The input PDF given as file path, bytes, ctypes array, byte buffer, or raw PDFium document handle.
-            A byte buffer is defined as an object that implements ``seek()``, ``tell()``, ``read()`` and ``readinto()``.
+            A byte buffer is defined as an object that implements ``seek() tell() read() readinto()``.
         password (str | None):
             A password to unlock the PDF, if encrypted. Otherwise, None or an empty string may be passed.
             If a password is given but the PDF is not encrypted, it will be ignored (as of PDFium 5418).
