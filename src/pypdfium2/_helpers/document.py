@@ -35,6 +35,8 @@ class PdfDocument (AutoCloseable):
             If a password is given but the PDF is not encrypted, it will be ignored (as of PDFium 5418).
         autoclose (bool):
             Whether byte buffer input should be automatically closed on finalization.
+        may_init_forms (bool):
+            Whether a form env may be initialized, if the document has forms.
     
     Raises:
         PdfiumError: Raised if the document failed to load. The exception message is annotated with the reason reported by PDFium.
@@ -47,7 +49,13 @@ class PdfDocument (AutoCloseable):
         * The ``del`` keyword and list index access may be used to delete pages.
     
     Attributes:
-        raw (FPDF_DOCUMENT): The underlying PDFium document handle.
+        raw (FPDF_DOCUMENT):
+            The underlying PDFium document handle.
+        formenv (PdfFormEnv | None):
+            Form env, if the document has forms and ``may_init_forms=True``.
+        formtype (int):
+            PDFium form type that applies to the document (``FORMTYPE_*``).
+            ``FORMTYPE_NONE`` if the document has no forms or ``may_init_forms=False``.
     """
     
     def __init__(
@@ -55,7 +63,7 @@ class PdfDocument (AutoCloseable):
             input,
             password = None,
             autoclose = False,
-            may_init_forms = True,  # TODO docs
+            may_init_forms = True,
         ):
         
         if isinstance(input, str):
@@ -81,10 +89,10 @@ class PdfDocument (AutoCloseable):
         
         AutoCloseable.__init__(self, self._close_impl, self._data_holder, self._data_closer)
         
-        self.formenv = None  # TODO docs
+        self.formenv = None
         if may_init_forms:
-            self.formtype = pdfium_c.FPDF_GetFormType(self)  # TODO docs
-            self._has_forms = self.formtype != pdfium_c.FORMTYPE_NONE
+            self.formtype = pdfium_c.FPDF_GetFormType(self)
+            self._has_forms = self.formtype != pdfium_c.FORMTYPE_NONE  # TODO maybe make public?
             if self._has_forms:
                 formconfig = pdfium_c.FPDF_FORMFILLINFO(version=2)
                 raw = pdfium_c.FPDFDOC_InitFormFillEnvironment(self, formconfig)
