@@ -10,6 +10,7 @@ Also see the issues panel and inline `TODO` marks in source code.
 * Consider making internal helpers public as well (consts, utils, autoclose).
 * Add a matrix-based rendering method, and perhaps a support method around it for common transformations (crop, margins, rotate, mirror, ...).
 * Add helpers for interruptible rendering.
+* Investigate possibility of using `functools.lru_cache()` or similar.
 
 ### Setup Infrastructure
 * Migrate everything to pathlib
