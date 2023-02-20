@@ -559,8 +559,8 @@ class PdfDocument (AutoCloseable):
         Render multiple pages in parallel, using a process pool executor.
         
         Hint:
-            If your code shall be packaged into a Windows executable, :func:`multiprocessing.freeze_support`
-            needs to be called at the start of your ``if __name__ == "__main__":`` block if using this method.
+            If your code shall be frozen into an executable, :func:`multiprocessing.freeze_support`
+            needs to be called at the start of the ``if __name__ == "__main__":`` block if using this method.
         
         Parameters:
             converter (typing.Callable):
