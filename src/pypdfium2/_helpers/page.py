@@ -264,14 +264,14 @@ class PdfPage (AutoCloseable):
             :class:`.PdfObject`: A page object.
         """
         
-        if form is None:
-            count_objects = pdfium_c.FPDFPage_CountObjects
-            get_object = pdfium_c.FPDFPage_GetObject
-            parent = self
-        else:
+        if form:
             count_objects = pdfium_c.FPDFFormObj_CountObjects
             get_object = pdfium_c.FPDFFormObj_GetObject
             parent = form
+        else:
+            count_objects = pdfium_c.FPDFPage_CountObjects
+            get_object = pdfium_c.FPDFPage_GetObject
+            parent = self
         
         n_objects = count_objects(parent)
         if n_objects == 0:
@@ -349,8 +349,8 @@ class PdfPage (AutoCloseable):
                 Amount in PDF canvas units to cut off from page borders (left, bottom, right, top). Crop is applied after rotation.
                 
             may_draw_forms (bool):
-                If True, render form fields.
-                
+                If True, render form fields (provided the document has forms and was opened with ``may_init_forms=True``).
+            
             bitmap_maker (typing.Callable):
                 Callback function used to create the :class:`.PdfBitmap`.
                 
