@@ -254,7 +254,8 @@ class PdfPage (AutoCloseable):
         
         Parameters:
             filter (list[int] | None):
-                An optional list of page object types to filter (``FPDF_PAGEOBJ_*``). Any objects whose type is not contained will be skipped.
+                An optional list of page object types to filter (:attr:`FPDF_PAGEOBJ_*`).
+                Any objects whose type is not contained will be skipped.
                 If None or empty, all objects will be provided, regardless of their type.
             max_depth (int):
                 Maximum recursion depth to consider when descending into Form XObjects.
@@ -310,8 +311,7 @@ class PdfPage (AutoCloseable):
         Parameters:
             flag (int): PDFium flattening target (:attr:`FLAT_*`)
         Returns:
-            int: PDFium flattening status (:attr:`FLATTEN_*`).
-            :attr:`FLATTEN_FAIL` is handled internally.
+            int: PDFium flattening status (:attr:`FLATTEN_*`). :attr:`FLATTEN_FAIL` is handled internally.
         """
         rc = pdfium_c.FPDFPage_Flatten(self, flag)
         if rc == pdfium_c.FLATTEN_FAIL:
