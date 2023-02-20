@@ -29,7 +29,7 @@ def test_xobject_placement():
     assert matrix == pdfium.PdfMatrix(0.5, 0, 0, 0.5, 0, h)
     po.set_matrix(matrix)
     assert po.get_matrix() == matrix
-    dest_page_1.insert_object(po)
+    dest_page_1.insert_obj(po)
     assert po.pdf is dest_pdf
     assert po.page is dest_page_1
     pos_a = po.get_pos()
@@ -40,7 +40,7 @@ def test_xobject_placement():
     matrix = base_matrix.mirror(v=True, h=False).translate(w, 0).translate(w, h)
     assert matrix == pdfium.PdfMatrix(-0.5, 0, 0, 0.5, 2*w, h)
     po.transform(matrix)
-    dest_page_1.insert_object(po)
+    dest_page_1.insert_obj(po)
     
     po = xobject.as_pageobject()
     assert po.get_matrix() == pdfium.PdfMatrix()
@@ -48,13 +48,13 @@ def test_xobject_placement():
     assert matrix == pdfium.PdfMatrix(0.5, 0, 0, -0.5, w, h)
     po.set_matrix(matrix)
     assert po.get_matrix() == matrix
-    dest_page_1.insert_object(po)
+    dest_page_1.insert_obj(po)
     
     po = xobject.as_pageobject()
     matrix = base_matrix.mirror(v=True, h=True).translate(w, h)
     assert matrix == pdfium.PdfMatrix(-0.5, 0, 0, -0.5, w, h)
     po.set_matrix(matrix)
-    dest_page_1.insert_object(po)
+    dest_page_1.insert_obj(po)
     
     dest_page_1.gen_content()
     square_len = w + h
@@ -64,25 +64,25 @@ def test_xobject_placement():
     matrix = base_matrix.rotate(360).translate(0, w)
     assert pytest.approx(matrix.get()) == (0.5, 0, 0, 0.5, 0, w)
     po.set_matrix(matrix)
-    dest_page_2.insert_object(po)
+    dest_page_2.insert_obj(po)
     
     po = xobject.as_pageobject()
     matrix = base_matrix.rotate(90).translate(0, w).translate(w, h)
     assert pytest.approx(matrix.get()) == (0, -0.5, 0.5, 0, w, w+h)
     po.set_matrix(matrix)
-    dest_page_2.insert_object(po)
+    dest_page_2.insert_obj(po)
     
     po = xobject.as_pageobject()
     matrix = base_matrix.rotate(180).translate(w, h).translate(h, 0)
     assert pytest.approx(matrix.get()) == (-0.5, 0, 0, -0.5, w+h, h)
     po.set_matrix(matrix)
-    dest_page_2.insert_object(po)
+    dest_page_2.insert_obj(po)
     
     po = xobject.as_pageobject()
     matrix = base_matrix.rotate(270).translate(h, 0)
     assert pytest.approx(matrix.get()) == (0, 0.5, -0.5, 0, h, 0)
     po.set_matrix(matrix)
-    dest_page_2.insert_object(po)
+    dest_page_2.insert_obj(po)
     
     dest_page_2.gen_content()
     dest_page_3 = dest_pdf.new_page(src_width, src_height)
@@ -90,12 +90,12 @@ def test_xobject_placement():
     po = xobject.as_pageobject()
     matrix = base_matrix.translate(-w/2, -h/2).rotate(90).translate(h/2, w/2)
     po.set_matrix(matrix)
-    dest_page_3.insert_object(po)
+    dest_page_3.insert_obj(po)
     
     po = xobject.as_pageobject()
     matrix = base_matrix.skew(10, 20).translate(0, w)
     po.set_matrix(matrix)
-    dest_page_3.insert_object(po)
+    dest_page_3.insert_obj(po)
     
     dest_page_3.gen_content()
     

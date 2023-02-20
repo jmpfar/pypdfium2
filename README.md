@@ -198,7 +198,7 @@ Here are some examples of using the support model API.
   image.set_matrix(matrix)
   
   page = pdf.new_page(metadata.width, metadata.height)
-  page.insert_object(image)
+  page.insert_obj(image)
   page.gen_content()
   ```
 

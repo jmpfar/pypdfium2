@@ -68,7 +68,7 @@ def test_new_image_from_jpeg():
     image_a.load_jpeg(buffer, autoclose=True)
     metadata = image_a.get_metadata()
     width, height = metadata.width, metadata.height
-    page.insert_object(image_a)
+    page.insert_obj(image_a)
     
     assert len(pdf._data_holder) == 2
     assert pdf._data_closer == [buffer]
@@ -106,7 +106,7 @@ def test_new_image_from_jpeg():
     assert image_b.get_matrix() == pdfium.PdfMatrix()
     image_b.set_matrix( pdfium.PdfMatrix().scale(width, height).translate(width, 0) )
     image_b.get_matrix() == pdfium.PdfMatrix(width, 0, 0, height, width, 0)
-    page.insert_object(image_b)
+    page.insert_obj(image_b)
     
     page.gen_content()
     out_path = OutputDir / "image_jpeg.pdf"
@@ -137,8 +137,8 @@ def test_new_image_from_bitmap():
     image_b.set_bitmap(bitmap)
     
     dst_page = dst_pdf.new_page(w, h)
-    dst_page.insert_object(image_a)
-    dst_page.insert_object(image_b)
+    dst_page.insert_obj(image_a)
+    dst_page.insert_obj(image_b)
     dst_page.gen_content()
     
     out_path = OutputDir / "image_bitmap.pdf"
@@ -237,11 +237,11 @@ def test_remove_image():
     assert len(images) == 3
     
     # drop an image
-    page_1.remove_object(images[0])
+    page_1.remove_obj(images[0])
     
     # delete and re-insert an image in place
-    page_1.remove_object(images[1])
-    page_1.insert_object(images[1])
+    page_1.remove_obj(images[1])
+    page_1.insert_obj(images[1])
     
     page_1.gen_content()
     

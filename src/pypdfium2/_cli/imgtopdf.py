@@ -62,7 +62,7 @@ def main(args):
         image_obj.set_matrix( pdfium.PdfMatrix().scale(width, height) )
         
         page = pdf.new_page(width, height)
-        page.insert_object(image_obj)
+        page.insert_obj(image_obj)
         page.gen_content()
         
         image_obj.close()  # no-op

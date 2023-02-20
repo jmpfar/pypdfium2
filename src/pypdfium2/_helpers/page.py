@@ -195,7 +195,7 @@ class PdfPage (AutoCloseable):
         return PdfTextPage(textpage, self)
     
     
-    def insert_object(self, pageobj):
+    def insert_obj(self, pageobj):
         """
         Insert a page object into the page.
         
@@ -220,7 +220,7 @@ class PdfPage (AutoCloseable):
         pageobj.pdf = self.pdf
     
     
-    def remove_object(self, pageobj):
+    def remove_obj(self, pageobj):
         """
         Remove a page object from the page.
         The page object must not be used afterwards, except for its ``close()`` method.
