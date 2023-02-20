@@ -151,16 +151,16 @@ class PdfTextPage (AutoCloseable):
         if loose:
             rect = pdfium_c.FS_RECTF()
             success = pdfium_c.FPDFText_GetLooseCharBox(self, index, rect)
-            left, bottom, right, top = rect.left, rect.bottom, rect.right, rect.top
+            l, b, r, t = rect.left, rect.bottom, rect.right, rect.top
         else:
-            left, bottom, right, top = c_double(), c_double(), c_double(), c_double()
-            success = pdfium_c.FPDFText_GetCharBox(self, index, left, right, bottom, top)
-            left, bottom, right, top = left.value, bottom.value, right.value, top.value
+            l, b, r, t = c_double(), c_double(), c_double(), c_double()
+            success = pdfium_c.FPDFText_GetCharBox(self, index, l, r, b, t)  # yes, lrbt here! (though uncommon and inconsistent)
+            l, b, r, t = l.value, b.value, r.value, t.value
         
         if not success:
             raise PdfiumError("Failed to get charbox.")
         
-        return left, bottom, right, top
+        return l, b, r, t
     
     
     def get_rect(self, index):
@@ -170,9 +170,9 @@ class PdfTextPage (AutoCloseable):
         Returns:
             Float values for left, bottom, right and top in PDF canvas units.
         """
-        left, top, right, bottom = c_double(), c_double(), c_double(), c_double()
-        pdfium_c.FPDFText_GetRect(self, index, left, top, right, bottom)
-        return (left.value, bottom.value, right.value, top.value)
+        l, b, r, t = c_double(), c_double(), c_double(), c_double()
+        pdfium_c.FPDFText_GetRect(self, index, l, t, r, b)  # yes, ltrb here! (though uncommon and inconsistent)
+        return (l.value, b.value, r.value, t.value)
     
     
     def search(self, text, index=0, match_case=False, match_whole_word=False):
