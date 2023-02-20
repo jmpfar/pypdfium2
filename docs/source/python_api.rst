@@ -51,13 +51,13 @@ Due to limitations in :mod:`weakref`, finalizers can only be attached to wrapper
 
 .. [#ac_obj_opaqueness] Python does not know how many resources an opaque C object might bind.
 
-.. [#ac_mixed_closing] Consequentally, if closing an object explicitly, all child objects must be closed explicitly as well. Otherwise, they may not have been garbage collected and finalized before the explicit close call on the parent object, resulting in an illicit order of closing.
+.. [#ac_mixed_closing] Consequently, if closing an object explicitly, all child objects must be closed explicitly as well. Otherwise, they may not have been garbage collected and finalized before the explicit close call on the parent object, resulting in an illicit order of closing.
 
 
 Thread incompatibility
 ----------------------
 
-PDFium is not thread-compatible. If you need to parallelise tasks, use processes instead of threads.
+PDFium is not thread-compatible. If you need to parallelize tasks, use processes instead of threads.
 
 
 Version
