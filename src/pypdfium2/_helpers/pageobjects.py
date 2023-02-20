@@ -326,11 +326,11 @@ class PdfImage (PdfObject):
     def extract(self, dest, *args, **kwargs):
         """
         Extract the image into an independently usable file or byte buffer.
-        Where possible, it will be attempted to transfer the image data directly, avoiding an unnecessary layer of decoding and re-encoding.
+        Where possible within PDFium's limited public API, it will be attempted to transfer the image data directly,
+        avoiding an unnecessary layer of decoding and re-encoding.
         Otherwise, the fully decoded data will be retrieved and (re-)encoded using :mod:`PIL`.
         
-        Note that this function is quite limited because PDFium's public API does not expose all required information.
-        Only DCTDecode (JPEG) and JPXDecode (JPEG 2000) images can be extracted directly.
+        As PDFium does not expose all required information, only DCTDecode (JPEG) and JPXDecode (JPEG 2000) images can be extracted directly.
         For images with complex filters, the bitmap data is used. Otherwise, ``get_data(decode_simple=True)`` is used, which avoids lossy conversion for images whose bit depth or colour format is not supported by PDFium's bitmap implementation.
         
         Parameters:
