@@ -56,7 +56,7 @@ def test_xobject_placement():
     po.set_matrix(matrix)
     dest_page_1.insert_object(po)
     
-    dest_page_1.generate_content()
+    dest_page_1.gen_content()
     square_len = w + h
     dest_page_2 = dest_pdf.new_page(square_len, square_len)
     
@@ -84,7 +84,7 @@ def test_xobject_placement():
     po.set_matrix(matrix)
     dest_page_2.insert_object(po)
     
-    dest_page_2.generate_content()
+    dest_page_2.gen_content()
     dest_page_3 = dest_pdf.new_page(src_width, src_height)
     
     po = xobject.as_pageobject()
@@ -97,7 +97,7 @@ def test_xobject_placement():
     po.set_matrix(matrix)
     dest_page_3.insert_object(po)
     
-    dest_page_3.generate_content()
+    dest_page_3.gen_content()
     
     dest_pdf.save(OutputDir / "xobject_placement.pdf")
 

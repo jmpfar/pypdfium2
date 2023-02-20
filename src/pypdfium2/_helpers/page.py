@@ -237,7 +237,7 @@ class PdfPage (AutoCloseable):
         pageobj.page = None
     
     
-    def generate_content(self):
+    def gen_content(self):
         """
         Generate page content to apply additions, removals or modifications of page objects.
         

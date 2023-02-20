@@ -199,7 +199,7 @@ Here are some examples of using the support model API.
   
   page = pdf.new_page(metadata.width, metadata.height)
   page.insert_object(image)
-  page.generate_content()
+  page.gen_content()
   ```
 
 * Save the document

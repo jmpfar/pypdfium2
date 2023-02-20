@@ -108,7 +108,7 @@ def test_new_image_from_jpeg():
     image_b.get_matrix() == pdfium.PdfMatrix(width, 0, 0, height, width, 0)
     page.insert_object(image_b)
     
-    page.generate_content()
+    page.gen_content()
     out_path = OutputDir / "image_jpeg.pdf"
     pdf.save(out_path)
     assert exists(out_path)
@@ -139,7 +139,7 @@ def test_new_image_from_bitmap():
     dst_page = dst_pdf.new_page(w, h)
     dst_page.insert_object(image_a)
     dst_page.insert_object(image_b)
-    dst_page.generate_content()
+    dst_page.gen_content()
     
     out_path = OutputDir / "image_bitmap.pdf"
     dst_pdf.save(out_path)
@@ -175,7 +175,7 @@ def test_replace_image_with_jpeg():
         image.set_matrix(new_matrix)
         assert image.get_matrix() == new_matrix
     
-    page.generate_content()
+    page.gen_content()
     output_path = OutputDir / "replace_images.pdf"
     pdf.save(output_path)
     assert exists(output_path)
@@ -243,7 +243,7 @@ def test_remove_image():
     page_1.remove_object(images[1])
     page_1.insert_object(images[1])
     
-    page_1.generate_content()
+    page_1.gen_content()
     
     output_path = OutputDir / "test_remove_objects.pdf"
     pdf.save(output_path)

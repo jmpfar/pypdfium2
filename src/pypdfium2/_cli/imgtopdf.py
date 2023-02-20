@@ -63,7 +63,7 @@ def main(args):
         
         page = pdf.new_page(width, height)
         page.insert_object(image_obj)
-        page.generate_content()
+        page.gen_content()
         
         image_obj.close()  # no-op
         page.close()
