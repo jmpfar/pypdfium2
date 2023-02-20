@@ -94,6 +94,11 @@ class PdfDocument (AutoCloseable):
             self._has_forms = False
     
     
+    @property
+    def parent(self):  # AutoCloseable hook
+        return None
+    
+    
     @staticmethod
     def _close_impl(raw, data_holder, data_closer):
         # can't close formenv here, would cause circular reference
@@ -612,7 +617,7 @@ class PdfFormEnv (AutoCloseable):
         AutoCloseable.__init__(self, self._close_impl, self.config, self.pdf)
     
     @property
-    def parent(self):
+    def parent(self):  # AutoCloseable hook
         return self.pdf
     
     @staticmethod
@@ -637,7 +642,7 @@ class PdfXObject (AutoCloseable):
         AutoCloseable.__init__(self, pdfium_c.FPDF_CloseXObject)
     
     @property
-    def parent(self):
+    def parent(self):  # AutoCloseable hook
         return self.pdf
     
     def as_pageobject(self):

@@ -43,7 +43,7 @@ class PdfPage (AutoCloseable):
     
     
     @property
-    def parent(self):
+    def parent(self):  # AutoCloseable hook
         return self.pdf
     
     

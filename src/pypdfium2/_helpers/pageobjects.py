@@ -73,7 +73,7 @@ class PdfObject (AutoCloseable):
     
     
     @property
-    def parent(self):
+    def parent(self):  # AutoCloseable hook
         if self.page is not None:
             return self.page
         else:

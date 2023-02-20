@@ -20,9 +20,6 @@ class AutoCastable:
     @property
     def _as_parameter_(self):  # ctypes hook
         return self.raw
-    
-    def __bool__(self):  # FIXME presumably not necessary, should be python default behaviour
-        return True
 
 
 class AutoCloseable (AutoCastable):
@@ -46,11 +43,6 @@ class AutoCloseable (AutoCastable):
         self._finalizer = None
         if needs_free:
             self._attach_finalizer()
-    
-    
-    @property
-    def parent(self):
-        return None
     
     
     def _attach_finalizer(self):

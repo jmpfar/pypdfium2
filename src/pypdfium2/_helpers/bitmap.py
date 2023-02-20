@@ -72,6 +72,11 @@ class PdfBitmap (AutoCloseable):
         AutoCloseable.__init__(self, pdfium_c.FPDFBitmap_Destroy, needs_free=needs_free, obj=self.buffer)
     
     
+    @property
+    def parent(self):  # AutoCloseable hook
+        return None
+    
+    
     def get_info(self):
         """
         Returns:

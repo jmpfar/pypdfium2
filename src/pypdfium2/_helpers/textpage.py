@@ -29,7 +29,7 @@ class PdfTextPage (AutoCloseable):
         AutoCloseable.__init__(self, pdfium_c.FPDFText_ClosePage)
     
     @property
-    def parent(self):
+    def parent(self):  # AutoCloseable hook
         return self.page
     
     
@@ -222,7 +222,7 @@ class PdfTextSearcher (AutoCloseable):
         AutoCloseable.__init__(self, pdfium_c.FPDFText_FindClose)
     
     @property
-    def parent(self):
+    def parent(self):  # AutoCloseable hook
         return self.textpage
     
     
